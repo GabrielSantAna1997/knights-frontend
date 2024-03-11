@@ -5,7 +5,7 @@
                 <div class="container d-flex justify-content-between align-items-center">
                     <div>
                         <a @click="goTo('')" class="navbar-brand">
-                            <strong>Cavaleiros</strong>
+                            <strong class="custom-title">Cavaleiros</strong>
                         </a>
                     </div>
                     <div>
@@ -29,4 +29,11 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.custom-title{
+    font-size: 2rem; 
+    color: rgb(255, 255, 255); 
+    cursor: pointer;
+}
+
+</style>

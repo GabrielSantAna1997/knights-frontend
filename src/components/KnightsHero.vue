@@ -15,24 +15,21 @@
                 <div class="mt-3">
                     <p><strong>Atributo Chave:</strong> {{ cavaleiro.keyAttribute }}</p>
                 </div>
-
                 <div class="btn-group">
-
                     <div class="mb-2">
                         <button @click="openEditForm(cavaleiro.nickname, cavaleiro._id)"
                             class="mr-2 btn btn-primary d-inline-block">Editar apelido</button>
                         <KnightsEdit :nickname="nickname" :showEditForm="showEditForm" :knightsId="knightsId"
                             @closeEdit="closeEdit" @knightEdited="knightEdited" class="d-inline-block"></KnightsEdit>
-
-
                         <button @click="openViewForm(cavaleiro._id)"
                             class="ml-2 btn btn-secondary d-inline-block">Visualizar</button>
                         <KnightsView :knightsId="knightsId" :showViewForm="showViewForm" @closeView="closeView"
                             class="d-inline-block"></KnightsView>
 
-
+                            
+                        <button @click="deleteKnight(cavaleiro._id)"
+                            class="ml-2 btn btn-danger d-inline-block">Aposentar</button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -42,6 +39,7 @@
 <script>
 import KnightsEdit from './KnightsEdit.vue';
 import KnightsView from './KnightsView.vue';
+import KnightsService from '../services/KnightsService';
 
 export default {
     components: {
@@ -124,6 +122,14 @@ export default {
         knightEdited() {
             this.showEditForm = false;
             this.$emit('knightHeroEdited');
+        },
+        async deleteKnight(knightsId) {
+            const confirmDelete = confirm("Tem certeza que deseja excluir este cavaleiro?");
+
+            if (confirmDelete) {
+                await KnightsService.deleteById(knightsId);
+                this.$emit('knightHeroEdited');
+            }
         }
 
     }

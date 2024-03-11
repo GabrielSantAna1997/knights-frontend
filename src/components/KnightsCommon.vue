@@ -4,6 +4,7 @@
             <div class="position-relative">
             </div>
             <div class="card-body text-center">
+                <i @click="promoteKnight(cavaleiro._id)" class="bi bi-star-fill custom-icon"></i>
                 <h5 class="card-title">{{ cavaleiro.nickname }}</h5>
                 <p class="card-text"><strong>Nome:</strong> {{ cavaleiro.name }}</p>
                 <p class="card-text"><strong>Idade:</strong> {{ calculateAge(cavaleiro.birthday) }}</p>
@@ -135,9 +136,23 @@ export default {
                 await KnightsService.deleteById(knightsId);
                 this.$emit('knightEdited');
             }
+        },
+        async promoteKnight(knightsId) {
+            const confirmDelete = confirm("Após a promoção do cavaleiro, ele não poderá voltar a ser um cavaleiro comum?");
+
+            if (confirmDelete) {
+                await KnightsService.updateKnightToHero(knightsId);
+                this.$emit('knightEdited');
+            }
         }
-
-
     }
 };
 </script>
+
+<style>
+.custom-icon{
+    font-size: 2rem; 
+    color: gold; 
+    cursor: pointer;
+}
+</style>

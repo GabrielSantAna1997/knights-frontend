@@ -52,6 +52,14 @@ const ApiService = {
             throw new Error('Erro ao tentar deletar o usuário');
         }
     },
+    async updateKnightToHero(userId) {
+        try {
+          const response = await axios.put(`${backendUrl}/knights/hero/${userId}`);
+          return response.data;
+        } catch (error) {
+          throw new Error('Erro ao atualizar usuário para herói');
+        }
+    },
       
 };
 
