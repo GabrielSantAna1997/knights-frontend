@@ -96,6 +96,7 @@ export default {
                 },
                 keyAttribute: ''
             };
+            this.$router.push(`/`);
         },
         adjustAttribute(attribute, operation) {
             if (operation === '+') {
